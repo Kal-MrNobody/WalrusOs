@@ -2,12 +2,27 @@
 Integration tests for all five framework integrations.
 
 Uses WalrusOS mock adapters so no network or LLM is required.
+
+Heavy third-party frameworks (crewai, autogen/pyautogen, openai, llama-index)
+are NOT installed by `.[dev]`. CI doesn't install `.[integrations]` because
+those packages have heavy native dependencies (chromadb, etc.) that often
+fail to build on Windows runners. The importorskip calls below cause this
+whole test module to skip cleanly when any framework is missing, instead of
+crashing pytest collection with ImportError.
+
+To run these tests locally: `pip install -e .[integrations]`.
 """
 from __future__ import annotations
 
 import asyncio
 import uuid
 import pytest
+
+# Skip the entire module if any required framework isn't installed.
+pytest.importorskip("crewai")
+pytest.importorskip("autogen")
+pytest.importorskip("openai")
+pytest.importorskip("llama_index")
 
 from walrusos import WalrusOS
 from walrusos.integrations.crewai    import WalrusMemory

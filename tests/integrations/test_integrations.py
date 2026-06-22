@@ -1,4 +1,16 @@
 import pytest
+
+# Skip the entire module if any required framework isn't installed.
+# CI installs .[dev] only; these heavy frameworks live in .[integrations]
+# and frequently fail to build on Windows runners. Run locally with:
+#     pip install -e .[integrations]
+pytest.importorskip("langgraph")
+pytest.importorskip("crewai")
+pytest.importorskip("autogen")
+pytest.importorskip("llama_index")
+pytest.importorskip("openai")
+pytest.importorskip("pydantic_ai")
+
 from walrusos import WalrusOS
 from walrusos.integrations.langgraph import AsyncWalrusSaver
 from walrusos.integrations.crewai import WalrusMemory

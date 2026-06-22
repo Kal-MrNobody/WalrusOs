@@ -32,14 +32,17 @@ dependencies = [
     "zstandard>=0.22.0",
     "cryptography>=42.0.5",
     "tenacity>=8.2.3",
+    # MCP server is a first-class feature (`walrusos mcp start` + Claude Desktop
+    # integration). Tests import walrusos.mcp.server unconditionally, so the
+    # SDK must always be available — not behind an optional extra.
+    "mcp>=1.0.0",
+    "python-dotenv>=1.0.0",
 ]
 
 [project.urls]
-Homepage      = "https://walrusos.network"
-Documentation = "https://docs.walrusos.network"
-Repository    = "https://github.com/walrusos/walrusos"
-Issues        = "https://github.com/walrusos/walrusos/issues"
-Changelog     = "https://github.com/walrusos/walrusos/blob/main/CHANGELOG.md"
+Repository    = "https://github.com/Kal-MrNobody/WalrusOs"
+Issues        = "https://github.com/Kal-MrNobody/WalrusOs/issues"
+Changelog     = "https://github.com/Kal-MrNobody/WalrusOs/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 # Sui blockchain anchoring (on-chain tamper evidence + capabilities)
@@ -69,6 +72,11 @@ dev = [
     "mypy>=1.9.0",
     "pre-commit>=3.6.0",
     "pip-audit>=2.7.0",
+    # fastapi is needed by tests/test_bridge_session_routes.py for TestClient.
+    # It's also in [dashboard] for runtime use; duplicated here so CI's
+    # `pip install -e .[dev]` is enough to collect every unit test.
+    "fastapi>=0.110.0",
+    "httpx>=0.27.0",  # TestClient transitively needs it
 ]
 # Everything
 all = [
@@ -86,6 +94,48 @@ walrusos = "walrusos.cli.main:app"
 
 [tool.hatch.build.targets.wheel]
 packages = ["walrusos"]
+
+[tool.hatch.build.targets.sdist]
+# Source distribution: ship the package + minimal docs only.
+# Explicitly EXCLUDE everything else to guarantee no secrets, no scratch
+# scripts, no test data, no built artifacts leak into the uploaded sdist.
+include = [
+    "walrusos/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "pyproject.toml",
+    ".env.example",
+]
+exclude = [
+    # tests, dashboards, sister projects
+    "tests/",
+    "dashboard/",
+    "move/",
+    "benchmarks/",
+    "demo/",
+    "docs/",
+    "examples/",
+    # one-off scripts and run artifacts
+    "scripts/",
+    "demo_*.py",
+    "diag_*.py",
+    "**/*.log",
+    "**/*.db",
+    "**/*.sqlite*",
+    "**/last_*proof.txt",
+    # secrets / local config
+    ".env",
+    "**/.env",
+    ".sui/",
+    "**/.walrusos/",
+    # repo plumbing
+    ".github/",
+    ".claude/",
+    ".pre-commit-config.yaml",
+    ".gitignore",
+    ".gitattributes",
+]
 
 [tool.ruff]
 line-length = 100
