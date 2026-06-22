@@ -10,17 +10,19 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-# CI runs in MOCK MODE only. No CI runner has the Sui CLI, a testnet wallet,
-# a Walrus publisher key, or a Gemini API key — and they should never be added
+# CI runs in MOCK MODE only. No runner has the Sui CLI, a testnet wallet,
+# a Walrus publisher key, or a Gemini API key — and they must never be added
 # as GitHub secrets just to make tests pass. The walrusos in-memory adapters
 # cover the full code path that the unit tests verify.
 #
-# Real-network integration tests live under tests/integration/ and are ignored
-# in CI. They are designed to be run manually from a developer machine that
-# has the credentials configured.
+# Real-network integration tests live under tests/integration/ and are
+# excluded from CI. Heavy framework integrations (crewai, autogen, openai,
+# llama_index, langgraph, pydantic_ai) live in tests/test_integrations.py and
+# tests/integrations/test_integrations.py; those modules use pytest.importorskip
+# so they skip cleanly when [integrations] extras aren't installed.
 
 jobs:
-  # ── Required: tests must pass for the badge to be green ────────────────────
+  # ── Required: test matrix is the gating signal for the badge ──────────────
   test:
     name: Test (Python ${{ matrix.python-version }}, ${{ matrix.os }})
     runs-on: ${{ matrix.os }}
@@ -39,19 +41,16 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
+          cache: pip
 
       - name: Install package + dev extras
         run: |
-          uv pip install -e ".[dev]" "pydantic[email]" pytest-cov --system
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
 
       - name: Run unit tests (mock mode, integration tests ignored)
         run: |
-          pytest tests/ --ignore=tests/integration \
+          python -m pytest tests/ --ignore=tests/integration \
             --tb=short \
             --cov=walrusos \
             --cov-report=xml \
@@ -65,28 +64,22 @@ jobs:
           file: coverage.xml
           fail_ci_if_error: false
 
-  # ── Advisory: lint runs but does not block ────────────────────────────────
-  # Will go green once code is run through ruff format + lint cleanup. Left
-  # advisory for now so style work doesn't block functional CI.
+  # ── Advisory: lint runs but does not block the badge ──────────────────────
   lint:
     name: Lint & Format (advisory)
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-
-      - name: Install lint tools
-        run: uv pip install ruff --system
+      - name: Install ruff
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install ruff
 
       - name: ruff check
         run: ruff check walrusos tests || true
@@ -94,56 +87,48 @@ jobs:
       - name: ruff format --check
         run: ruff format --check walrusos tests || true
 
-  # ── Advisory: type check runs but does not block ──────────────────────────
+  # ── Advisory: type check ───────────────────────────────────────────────────
   typecheck:
     name: Type Check (advisory)
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-
-      - name: Install type-check tools
-        run: uv pip install -e ".[dev]" "pydantic[email]" --system
+      - name: Install package + dev tools
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
 
       - name: mypy
         run: mypy walrusos --ignore-missing-imports || true
 
-  # ── Advisory: security audit runs but does not block ──────────────────────
+  # ── Advisory: security audit ──────────────────────────────────────────────
   security:
     name: Security Audit (advisory)
     runs-on: ubuntu-latest
     continue-on-error: true
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+          cache: pip
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
-
-      - name: pip-audit on locked deps
+      - name: Install pip-audit
         run: |
-          uv pip install pip-audit --system
-          uv pip freeze --system > /tmp/frozen.txt
-          pip-audit --requirement /tmp/frozen.txt || true
+          python -m pip install --upgrade pip
+          python -m pip install pip-audit
+
+      - name: pip-audit on declared deps
+        run: pip-audit --requirement <(python -m pip freeze) || true
+        shell: bash
 
   # ── Optional: benchmark on main push only ─────────────────────────────────
-  # Non-blocking. Skips if benchmarks/ requires real adapters.
   benchmark:
     name: Performance Benchmark (advisory)
     runs-on: ubuntu-latest
@@ -154,19 +139,15 @@ jobs:
       PYTHONIOENCODING: utf-8
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v5
-        with:
-          enable-cache: true
+          cache: pip
 
       - name: Install package
-        run: uv pip install -e ".[dev]" "pydantic[email]" --system
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
 
       - name: Run benchmark suite (mock mode, small)
         run: python benchmarks/bench_suite.py --iterations 1000 --search-corpus 100 || true
