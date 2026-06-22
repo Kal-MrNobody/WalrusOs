@@ -1,0 +1,75 @@
+=== demo_cross_vendor.py --auto re-run at 2026-06-22 02.51.40 ===
+[WARNING] walrusos.adapters.sui: pysui not installed — falling back to sui CLI for on-chain operations.
+[INFO] walrusos.adapters.sui_real: Sui wallet connected: 0x114702611c4e6411af933347f2268b32f286af5a05478af8516e670aeb756de1
+[WARNING] walrusos.adapters.key_store: KeyStore: WALRUSOS_KEY_PASSWORD not set. Using machine-derived KEK. Set WALRUSOS_KEY_PASSWORD in production for stronger key protection.
+[INFO] walrusos.client: WalrusOS initialised (wallet: 0x114702611c4e64, package: 0x3339a7cf056505)
+[INFO] walrusos.adapters.sui_real: Sui PTB: protocol::anchor_event(0x0f96188ee403ecc58bd498fb874ef3037078775deb68e2061964ac1d3827e27d, 71d7ed6133af45e8fad2f28d98cf6ff4038f5acf05acc55b45e94863a32d5368, MemoryAppended)
+[INFO] walrusos.adapters.sui: ProtocolEvent 71d7ed6133af45e8 anchored on Sui (tx: E3hbb1RWHx7hF3v4)
+[INFO] walrusos.adapters.sui_real: Sui PTB: protocol::anchor_event(0x0f96188ee403ecc58bd498fb874ef3037078775deb68e2061964ac1d3827e27d, 9a8d2be68e42b47320a53bea2510f0674a03fb0f7c3c336372acc463452b23c4, MemoryAppended)
+[INFO] walrusos.adapters.sui: ProtocolEvent 9a8d2be68e42b473 anchored on Sui (tx: BozuWj9343S9TcwF)
+[INFO] walrusos.adapters.sui_real: Sui PTB: protocol::anchor_event(0x0f96188ee403ecc58bd498fb874ef3037078775deb68e2061964ac1d3827e27d, 94c4559ba28e0cd51d27eb49c36b50c041453827e0a1285cafdbb874260084ff, MemoryAppended)
+[INFO] walrusos.adapters.sui: ProtocolEvent 94c4559ba28e0cd5 anchored on Sui (tx: 2pTXDm6dZgm6GFYq)
+========================================================================
+  WalrusOS — Cross-Vendor Agent Collaboration
+  Anthropic (Claude Desktop) + Google (Gemini) sharing memory.
+  Mode: AUTO
+========================================================================
+
+[pre-flight] WALRUSOS_USE_MOCKS = False
+[pre-flight] Workspace:          'default' (shared with Claude Desktop)
+[pre-flight] Stream:             'cross-vendor-collab'
+[pre-flight] Bridge:             http://localhost:8787
+[pre-flight] Bridge reachable:   True
+[pre-flight] GEMINI_API_KEY:    set (AIzaSy…)
+
+[workspace] 'default'  id=916180a7-0b43-5c08-b3c8-c738826880bb
+
+[connect] Gemini Analyst — analysis, research
+[connect] Gemini Critic  — review, critique
+
+[stream]   'cross-vendor-collab'  id=fd02cfdf-d100-5586-8974-bfd038bcc73f
+
+[llm] GeminiProvider(gemini-2.5-flash) — real API calls
+
+[run-start] 2026-06-21T21:21:43.294444+00:00  (proof file will filter to events ≥ this)
+[subscribe] Analyst and Critic both subscribing to the stream…
+
+[seed] Coordinator writing the kickoff memory to 'cross-vendor-collab'…
+        seed event id: 71d7ed6133af45e8…
+
+[event] Analyst received memory from agent_id=0c2545ee…
+
+[event] Critic received Analyst's write — reacting…
+
+[chain] Critic done. Cross-vendor chain complete.
+
+========================================================================
+  CHAIN SUMMARY
+========================================================================
+
+  ── Step 1: Gemini Analyst (gemini) ──
+     Recalled 20 of 20 memories (~1059 tokens)
+     Recall preview: [Coordinator] Kickoff: Evaluate whether end-to-end encrypted memory streams can scale to support 10k+ concurrent AI agents while preserving …
+     Contribution: **Coordinator's** latest memory consistently reiterates the critical task:…
+
+  ── Step 2: Gemini Critic (gemini) ──
+     Recalled 21 of 21 memories (~1106 tokens)
+     Recall preview: [Gemini Analyst] **Coordinator's** latest memory consistently reiterates the critical task: 71d7ed6133af45e8fad2f28d98cf6ff4038f5acf05acc55b…
+     Contribution: Gemini Analyst's observation that "**Coordinator's** latest memory consistently…
+
+[proof] Saved: C:\Users\ACER\OneDrive\Desktop\WalrusOS\scripts\last_cross_vendor_proof.txt
+        Events shown:  3
+        Anchored on Sui: 3 of 3
+
+[done] Keeping agents online for 60s for the dashboard…
+       In Claude Desktop you can now call memory_search on the
+       stream 'cross-vendor-collab' to see the Gemini contributions —
+       bidirectional cross-vendor memory sharing.
+
+[shutdown] Disconnecting…
+
+========================================================================
+  Done. Chain steps: 2
+  Workspace: 'default'  Stream: 'cross-vendor-collab'
+  Proof file: last_cross_vendor_proof.txt
+========================================================================

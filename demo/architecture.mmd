@@ -1,0 +1,30 @@
+```mermaid
+graph TD
+    subgraph Agents
+        R[Research Agent]
+        Rev[Reviewer Agent]
+        W[Writer Agent]
+    end
+
+    subgraph WalrusOS Engine
+        SDK[WalrusOS SDK]
+        VM[EventStore Engine]
+        Val[Validation Engine]
+    end
+
+    subgraph Decentralized Infrastructure
+        SUI[Sui Blockchain]
+        WAL[Walrus Storage]
+    end
+
+    R -->|Append Event| SDK
+    Rev -->|Append Event| SDK
+    W -->|Fork Stream| SDK
+
+    SDK --> VM
+    VM <--> Val
+
+    Val -->|Check Capabilities| SUI
+    VM -->|Anchor Blobs| WAL
+    VM -->|Fetch Replay| WAL
+```

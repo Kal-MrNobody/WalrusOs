@@ -1,0 +1,66 @@
+=== demo_cross_vendor.py --auto run at 2026-06-22 02.39.42 ===
+pysui not installed — falling back to sui CLI for on-chain operations.
+KeyStore: WALRUSOS_KEY_PASSWORD not set. Using machine-derived KEK. Set WALRUSOS_KEY_PASSWORD in production for stronger key protection.
+========================================================================
+  WalrusOS — Cross-Vendor Agent Collaboration
+  Anthropic (Claude Desktop) + Google (Gemini) sharing memory.
+  Mode: AUTO
+========================================================================
+
+[pre-flight] WALRUSOS_USE_MOCKS = False
+[pre-flight] Workspace:          'default' (shared with Claude Desktop)
+[pre-flight] Stream:             'cross-vendor-collab'
+[pre-flight] Bridge:             http://localhost:8787
+[pre-flight] Bridge reachable:   True
+[pre-flight] GEMINI_API_KEY:    set (AIzaSy…)
+
+[workspace] 'default'  id=916180a7-0b43-5c08-b3c8-c738826880bb
+
+[connect] Gemini Analyst — analysis, research
+[connect] Gemini Critic  — review, critique
+
+[stream]   'cross-vendor-collab'  id=fd02cfdf-d100-5586-8974-bfd038bcc73f
+
+[llm] GeminiProvider(gemini-2.5-flash) — real API calls
+
+[subscribe] Analyst and Critic both subscribing to the stream…
+
+[seed] Coordinator writing the kickoff memory to 'cross-vendor-collab'…
+        seed event id: 7d93ac6531fbc3f8…
+
+[event] Analyst received memory from agent_id=0c2545ee…
+
+[event] Critic received Analyst's write — reacting…
+
+[chain] Critic done. Cross-vendor chain complete.
+
+========================================================================
+  CHAIN SUMMARY
+========================================================================
+
+  ── Step 1: Gemini Analyst (gemini) ──
+     Recalled 16 of 16 memories (~850 tokens)
+     Recall preview: [Coordinator] Kickoff: Evaluate whether end-to-end encrypted memory streams can scale to support 10k+ concurrent AI agents while preserving …
+     Contribution: **Coordinator's** latest memory reiterates the critical task of evaluating end…
+
+  ── Step 2: Gemini Critic (gemini) ──
+     Recalled 17 of 17 memories (~898 tokens)
+     Recall preview: [Gemini Analyst] **Coordinator's** latest memory reiterates the critical task of evaluating end 7d93ac6531fbc3f86d57907a1f5b9e1a412326df88d3…
+     Contribution: Gemini Analyst's contribution, "Coordinator's latest memory reiterates the…
+
+[event] Critic received Analyst's write — reacting…
+
+[proof] Saved: C:\Users\ACER\OneDrive\Desktop\WalrusOS\scripts\last_cross_vendor_proof.txt
+
+[done] Keeping agents online for 60s for the dashboard…
+       In Claude Desktop you can now call memory_search on the
+       stream 'cross-vendor-collab' to see the Gemini contributions —
+       bidirectional cross-vendor memory sharing.
+
+[shutdown] Disconnecting…
+
+========================================================================
+  Done. Chain steps: 3
+  Workspace: 'default'  Stream: 'cross-vendor-collab'
+  Proof file: last_cross_vendor_proof.txt
+========================================================================

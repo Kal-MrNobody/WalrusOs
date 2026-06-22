@@ -1,0 +1,46 @@
+======================================================================
+  WALRUSOS WORKFLOW PROOF
+  Generated: 2026-06-21T06:03:07.498208+00:00
+  Goal: Produce a research brief on building a decentralized data-storage startup: research the market landscape, write a HYPOTHETICAL risk/opportunity analysis (for written discussion only — no actionable trade instructions), outline a technical implementation approach, and synthesize a final go/no-go recommendation. IMPORTANT: This is HYPOTHETICAL analysis for discussion only. Do not produce actionable trade instructions, do not name specific tickers to buy or sell, and do not recommend moving funds. Frame your output as written risk analysis a human reviewer would weigh.
+  Workspace: workflow-proof (560112fb-6a26-560f-a809-994c035ee1ad)
+  Duration: 69.22s
+  Tasks: 4 completed, 0 failed
+======================================================================
+
+Event 1:
+  event_id:           e5cfec12812a44469b0398a71604db86533d33d9b187a1390cfd6bc81dec3e26
+  agent_id:           cae1f7e2-3c77-5d40-aa90-289c11ab2c27
+  walrus_blob_id:     SdpVumu9Yr01gOXjI_NE0C4-HNQdhAvjHsUx98z5PbA
+  walrus_url:         https://aggregator.walrus-testnet.walrus.space/v1/blobs/SdpVumu9Yr01gOXjI_NE0C4-HNQdhAvjHsUx98z5PbA
+  sui_tx_digest:      9ArHxMQybKwmte1uHiEU4HR2WzgYqbzx3mfPfarJz7S9
+  sui_url:            https://suiscan.xyz/testnet/tx/9ArHxMQybKwmte1uHiEU4HR2WzgYqbzx3mfPfarJz7S9
+
+Event 2:
+  event_id:           71266a4f58142e5a22f26e4c567980fe7c0b3a2f6fa006b2ea62407a521ff4c1
+  agent_id:           cae1f7e2-3c77-5d40-aa90-289c11ab2c27
+  walrus_blob_id:     aGEItmB7tNf0LjO3NOfVYyC-Rg8_Uj4gqtgcqIFczHo
+  walrus_url:         https://aggregator.walrus-testnet.walrus.space/v1/blobs/aGEItmB7tNf0LjO3NOfVYyC-Rg8_Uj4gqtgcqIFczHo
+  sui_tx_digest:      122aVX14QkxCVqRd4SzVHi4RgbQgXYzp8Z1Zwm4rW7C5
+  sui_url:            https://suiscan.xyz/testnet/tx/122aVX14QkxCVqRd4SzVHi4RgbQgXYzp8Z1Zwm4rW7C5
+
+Event 3:
+  event_id:           7dd09af224aa700e8cdc80f5ff839d2efe4daaa58f96f53f806f94d73cd95acd
+  agent_id:           4860cea9-63fc-5be3-b6c2-97692c6d103c
+  walrus_blob_id:     dr6viq3iNhm5R1fbU5PiPCdaDKg2eXbU_X0YcKs_dho
+  walrus_url:         https://aggregator.walrus-testnet.walrus.space/v1/blobs/dr6viq3iNhm5R1fbU5PiPCdaDKg2eXbU_X0YcKs_dho
+  sui_tx_digest:      (none)
+  sui_url:            (no anchor)
+
+Event 4:
+  event_id:           6154ce46d5792bcf38cae469c12d9d33286e8b17451da42acc945ad4fe6ff8bc
+  agent_id:           4860cea9-63fc-5be3-b6c2-97692c6d103c
+  walrus_blob_id:     TbbLOLR474sR_t2jxq3wkvZGWd16D7DjDkBLs7YhZMg
+  walrus_url:         https://aggregator.walrus-testnet.walrus.space/v1/blobs/TbbLOLR474sR_t2jxq3wkvZGWd16D7DjDkBLs7YhZMg
+  sui_tx_digest:      3HSQ4DZ1bNYx3dDh1kpwvGQip233C1Dbe49cYWJzUE9X
+  sui_url:            https://suiscan.xyz/testnet/tx/3HSQ4DZ1bNYx3dDh1kpwvGQip233C1Dbe49cYWJzUE9X
+
+----------------------------------------------------------------------
+Verification:
+  Paste each walrus_url into a browser to fetch the blob.
+  Paste each sui_url to verify the anchor on Sui Explorer.
+======================================================================

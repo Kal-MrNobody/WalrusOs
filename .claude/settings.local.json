@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell($env:WALRUSOS_USE_MOCKS = \"1\"; python -m pytest tests/test_autonomous_runtime.py -v 2>&1)",
+      "PowerShell([System.Environment]::GetEnvironmentVariable\\(\"GEMINI_API_KEY\", \"User\"\\) | Select-Object -First 1 | ForEach-Object { if \\($_\\) { \"KEY_SET: \" + $_.Substring\\(0,8\\) + \"...\" } else { \"NOT_SET\" } })",
+      "PowerShell($k = [System.Environment]::GetEnvironmentVariable\\(\"GEMINI_API_KEY\", \"User\"\\); if \\($k\\) { \"SET: $\\($k.Substring\\(0,8\\)\\)...\" } else { $k2 = [System.Environment]::GetEnvironmentVariable\\(\"GEMINI_API_KEY\", \"Machine\"\\); if \\($k2\\) { \"MACHINE: $\\($k2.Substring\\(0,8\\)\\)...\" } else { \"NOT SET\" } })",
+      "WebFetch(domain:github.com)"
+    ]
+  }
+}

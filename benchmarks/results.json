@@ -1,0 +1,50 @@
+[
+    {
+        "scale": 100,
+        "append_ops_sec": 679.9816132521646,
+        "append_latency_ms": 1.4706280000973493,
+        "walrus_latency_ms": 250.8448263065059,
+        "sui_latency_ms": 413.3745475667257,
+        "replay_ops_sec": 32134.70879725542,
+        "search_latency_ms": 0.4529799989541061,
+        "recovery_time_sec": 0.35378878631332034,
+        "memory_mb": 2.609375,
+        "cpu_sec": 0.140625
+    },
+    {
+        "scale": 1000,
+        "append_ops_sec": 695.5740276795802,
+        "append_latency_ms": 1.4376615000073798,
+        "walrus_latency_ms": 250.2160850033105,
+        "sui_latency_ms": 401.9591145054213,
+        "replay_ops_sec": 79510.21705449083,
+        "search_latency_ms": 3.851769996981602,
+        "recovery_time_sec": 1.2565791350084763,
+        "memory_mb": 2.265625,
+        "cpu_sec": 1.265625
+    },
+    {
+        "scale": 10000,
+        "append_ops_sec": 651.8417090014974,
+        "append_latency_ms": 1.5341147800005273,
+        "walrus_latency_ms": 249.49467056793904,
+        "sui_latency_ms": 401.3265226295156,
+        "replay_ops_sec": 55414.9862097019,
+        "search_latency_ms": 52.98474000010174,
+        "recovery_time_sec": 13.23375016568308,
+        "memory_mb": 16.60546875,
+        "cpu_sec": 13.40625
+    },
+    {
+        "scale": 100000,
+        "append_ops_sec": 634.4534656853882,
+        "append_latency_ms": 1.576159725000034,
+        "walrus_latency_ms": 252.0301827126643,
+        "sui_latency_ms": 396.8957107997053,
+        "replay_ops_sec": 45342.98316650096,
+        "search_latency_ms": 517.2407699996256,
+        "recovery_time_sec": 135.53419902126882,
+        "memory_mb": 194.3203125,
+        "cpu_sec": 138.59375
+    }
+]

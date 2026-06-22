@@ -1,0 +1,36 @@
+# Secrets — never commit
+.env
+*.env
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Test / coverage artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Database (SQLite cache — not source of truth)
+*.db
+*.sqlite
+*.sqlite3
+
+# Node / dashboard
+node_modules/
+.next/
+
+# OS
+.DS_Store
+Thumbs.db
